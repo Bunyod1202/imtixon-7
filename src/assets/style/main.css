@@ -1,29 +1,26 @@
 /* poppins-regular - latin */
 @font-face {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  src: local(''),
-       url('../fonts/poppins-v20-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../fonts/poppins-v20-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: url("../fonts/poppins-v20-latin-regular.woff2") format("woff2"),
+    url("../fonts/poppins-v20-latin-regular.woff") format("woff");
 }
 /* poppins-500 - latin */
 @font-face {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
-  src: local(''),
-       url('../fonts/poppins-v20-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../fonts/poppins-v20-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: url("../fonts/poppins-v20-latin-500.woff2") format("woff2"),
+    url("../fonts/poppins-v20-latin-500.woff") format("woff");
 }
 /* aref-ruqaa-regular - latin */
 @font-face {
-  font-family: 'Aref';
+  font-family: "Aref";
   font-style: normal;
   font-weight: 400;
-  src: local(''),
-       url('../fonts/aref-ruqaa-v25-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../fonts/aref-ruqaa-v25-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: url("../fonts/aref-ruqaa-v25-latin-regular.woff2") format("woff2"),
+    url("../fonts/aref-ruqaa-v25-latin-regular.woff") format("woff");
 }
 * {
   box-sizing: border-box;
@@ -41,9 +38,9 @@ body {
   background-color: rgba(255, 255, 255, 0.6) !important;
   border-radius: 10px;
   width: 57.39px;
-height: 3px;
+  height: 3px;
 }
 .owl-dots .active {
-  background-color: #fff!important;
-
+  background-color: #fff !important;
+color: #00000033;
 }

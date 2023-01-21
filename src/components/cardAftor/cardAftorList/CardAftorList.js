@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material"
 import { CardAftorItem } from "../cardAftorItem/CardAftorItem"
 
-
 export const CardAftorList = () => {
 
   return (

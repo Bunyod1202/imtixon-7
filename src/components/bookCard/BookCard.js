@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Box, Link, List, ListItem, Typography } from '@mui/material'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { api } from '../../API/API'
-import { CardAftorList } from './cardAftorList/CardAftorList'
+import { BookCardList } from './bookCardList/BookCardList'
 
-export const CardAftor = () => {
+export const BookCard = () => {
 
   const [genre, setGenre] = useState([])
 
@@ -41,19 +41,22 @@ export const CardAftor = () => {
           {
             genre?.map((item, index) =>
               <ListItem key={index} sx={{ width: "180px" }}>
-                <Link to={`${item.id}`} component={NavLink} sx={{
-                  textAlign: 'center',
-                  textDecoration: "none",
-                  color: "link.primary",
-                  fontFamily: 'Poppins',
-                  fontWeight: "400",
-                  fontSize: "16px",
-                  lineHeight: "144.4%",
-                  width: "180px",
-                  '&.active': {
-                    color: '#C9AC8C',
-                  }
-                }}>
+                <Link
+                  to={`${item.id}`}
+                  component={NavLink}
+                  sx={{
+                    textAlign: 'center',
+                    textDecoration: "none",
+                    color: "link.primary",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "16px",
+                    lineHeight: "144.4%",
+                    width: "180px",
+                    '&.active': {
+                      color: '#C9AC8C',
+                    }
+                  }}>
                   {item.name}
                 </Link>
               </ListItem>)
@@ -61,14 +64,13 @@ export const CardAftor = () => {
         </List>
         <Box marginTop="40px">
           <Routes>
-            <Route path='/1' end element={<CardAftorList />} />
-            <Route path='/2' element={<CardAftorList />} />
-            <Route path='/3' element={<CardAftorList />} />
-            <Route path='/4' element={<CardAftorList />} />
+            <Route path='/1' end element={<BookCardList />} />
+            <Route path='/2' element={<BookCardList />} />
+            <Route path='/3' element={<BookCardList />} />
+            <Route path='/4' element={<BookCardList />} />
           </Routes>
         </Box>
       </Box>
     </>
   )
 }
-

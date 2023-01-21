@@ -1,11 +1,23 @@
-import {  Card,  CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
+import { Card, CardContent, CardMedia, Link, Typography } from '@mui/material'
+import { Link as RoutLink } from 'react-router-dom'
 import AvloniyImg from "../../../assets/image/avloniy.png"
-import FrameImg from "../../../assets/image/Frame.png"
 export const CardAftorItem = () => {
   return (
     <>
-      <Card sx={{ width: "295px", bgcolor: "background.card_collor",marginBottom:"24px" ,borderRadius:"23px"}}>
+      <Card
+        sx={{
+          width: "295px",
+          bgcolor: "background.card_collor",
+          marginBottom: "24px",
+          borderRadius: "23px"
+        }}>
+        <Link
+          component={RoutLink}
+          to="/"
+          sx={{
+            textDecoration: "none"
+          }}>
         <CardMedia
           sx={{ height: 224 }}
           image={AvloniyImg}
@@ -25,22 +37,23 @@ export const CardAftorItem = () => {
               color: "text.card_title",
             }}
             component="div">
-          Abdulla Avloniy
+            Abdulla Avloniy
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
-          sx={{
-            fontFamily: 'Poppins',
-            fontWeight: "400",
-            fontSize: "16px",
-            lineHeight: "24px",
-            color: "link.primary", 
-            marginBottom:"63px"
-          }}>
-          1878-1934
+            sx={{
+              fontFamily: 'Poppins',
+              fontWeight: "400",
+              fontSize: "16px",
+              lineHeight: "24px",
+              color: "link.primary",
+              marginBottom: "63px"
+            }}>
+            1878-1934
           </Typography>
-        </CardContent>
+          </CardContent>
+          </Link>
       </Card>
     </>
   )

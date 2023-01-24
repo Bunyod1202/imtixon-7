@@ -5,6 +5,6 @@ export const langEdit = (lang) => {
 
   return {
     type: LANG,
-    paylod:lang
+    paylod: lang
   }
 }

@@ -48,7 +48,7 @@ export const RegisterPage = () => {
   const onSubmit = (data) => {
     const RegisterApiUser = async () => {
       const cardCasts = await api.RegisterApi(data)
-      
+
       if (cardCasts.status === 201) {
         localStorage.setItem('token', JSON.stringify(cardCasts.data.token));
         dispatch(TokenRegisterAdd({ token: cardCasts.data.token }))
@@ -185,7 +185,7 @@ export const RegisterPage = () => {
                     color: "#AAAAAA",
                   }}
                   type="password"
-                 
+
                 />
                 <FormHelperText error>{errors.password?.message}</FormHelperText>
               </Stack>

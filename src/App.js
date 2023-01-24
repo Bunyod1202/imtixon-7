@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline, Paper, } from "@mui/material";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "./page/homePage/HomePage";
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
@@ -15,15 +15,14 @@ import { AddBookPage } from "./page/addBookPage/AddBookPage";
 import { AddAfterPage } from "./page/addAfterPage/AddAfterPage";
 import { AdminPage } from "./page/adminPage/AdminPage";
 import { useSelector } from "react-redux";
-import BgImg from './assets/image/ornament.png'
 function App() {
   const theme = useSelector((state) => state.theme.theme)
   const token = useSelector((state) => state.token.token)
-  const navigator = useNavigate()
+
 
 
   const getDesignTokens = (mode) => ({
-    
+
     palette: {
       mode,
       primary: {
@@ -40,9 +39,9 @@ function App() {
           paper: "#fff",
           form: "#404040",
           card_collor: "#1E1E1E",
-          addBook:"#1B1B1B",
-          navActive:"#F3F6F9",
-          nav:"#2D2D2D"
+          addBook: "#1B1B1B",
+          navActive: "#F3F6F9",
+          nav: "#2D2D2D"
         },
       }),
       ...(mode === 'light' && {
@@ -51,9 +50,9 @@ function App() {
           paper: "#191919",
           form: "#F5F5F5",
           card_collor: "#F5F5F5",
-          addBook:"#f3f3f3ed",
-          navActive:"#DDE6F5",
-          nav:"#F3F6F9"
+          addBook: "#f3f3f3ed",
+          navActive: "#DDE6F5",
+          nav: "#F3F6F9"
 
         },
       }),
@@ -98,7 +97,7 @@ function App() {
   });
 
   const darkModeTheme = createTheme(getDesignTokens(theme),);
-  
+
   i18n.use(initReactI18next).init({
     fallbackLng: localStorage.getItem("lang") || "uz",
     interpolation: {
@@ -125,20 +124,20 @@ function App() {
             boxShadow: "0",
           }} >
           {
-          <Routes>
-            <Route path='/' element={<Navigate to="/home/1" replace={true} />} />
-            <Route path="/home/*" element={token? <HomePage />:<LoginPage/>} />
-            <Route path="/books/*" element={<BooksPage />} />
-            <Route path="/after/:id" element={<AfterPage/>} />
-            <Route path="/book/:id" element={<BookPage/>} />
-            <Route path="/add-book" element={<AddBookPage/>} />
-            <Route path="/add-after" element={<AddAfterPage/>} />
-            <Route path="/admin/*" element={<AdminPage/>} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
-          </Routes>
+            <Routes>
+              <Route path='/' element={<Navigate to="/home/1" replace={true} />} />
+              <Route path="/home/*" element={token ? <HomePage /> : <LoginPage />} />
+              <Route path="/books/*" element={<BooksPage />} />
+              <Route path="/after/:id" element={<AfterPage />} />
+              <Route path="/book/:id" element={<BookPage />} />
+              <Route path="/add-book" element={<AddBookPage />} />
+              <Route path="/add-after" element={<AddAfterPage />} />
+              <Route path="/admin/*" element={<AdminPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage />} />
+            </Routes>
           }
-           
+
         </Paper>
       </ThemeProvider>
     </>

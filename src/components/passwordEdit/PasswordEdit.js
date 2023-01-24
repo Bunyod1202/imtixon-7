@@ -1,4 +1,4 @@
-import {  InputBase, Box, Typography, Container, Button, FormHelperText } from '@mui/material'
+import { InputBase, Box, Typography, Container, Button, FormHelperText } from '@mui/material'
 
 import React from 'react'
 import { useForm } from "react-hook-form"
@@ -40,7 +40,8 @@ export const PasswordEdit = () => {
 
   const onSubmit = (data) => {
     const ApiPasswordEdit = async () => {
-      const cardCasts = await api.PasswordEditApi(data,token_id)
+      const cardCasts = await api.PasswordEditApi(data, token_id)
+      console.log(cardCasts);
     }
     ApiPasswordEdit()
   }
@@ -52,11 +53,11 @@ export const PasswordEdit = () => {
           width: "1310px"
         }}>
         <Box
-          
+
           sx={{
             display: "flex",
             justifyContent: "center",
-        
+
           }}>
           <Box
             sx={{

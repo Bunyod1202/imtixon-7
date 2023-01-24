@@ -16,7 +16,7 @@ export const AddBookPage = () => {
   const [inputImgAdd, setInputImgAdd] = useState("")
   const [afterId, setAfterId] = useState([])
   const { t } = useTranslation();
- const navigator = useNavigate()
+  const navigator = useNavigate()
   const [inputImg, setInputImg] = useState("")
   const schema = Yup.object(
     {
@@ -44,7 +44,7 @@ export const AddBookPage = () => {
     defaultValues: {
       title: '',
       page: '',
-      year:'',
+      year: '',
       price: '',
       genre_id: '',
       author_id: '',
@@ -65,7 +65,7 @@ export const AddBookPage = () => {
     formData.append("description", data.description)
     formData.append("image", inputImgAdd)
     const bookApiAdd = async () => {
-      const cardCasts = await api.AddBookApi(formData,token_id)
+      const cardCasts = await api.AddBookApi(formData, token_id)
       if (cardCasts.status === 201) {
         navigator(-1)
       }
@@ -86,7 +86,7 @@ export const AddBookPage = () => {
   const resAfter = (evt) => {
     let id = evt.target.value
     const afteGet = async () => {
-      const cardCasts = await api.AfterGanreGet(id,token_id)
+      const cardCasts = await api.AfterGanreGet(id, token_id)
       setAfterId(cardCasts.data)
     }
     afteGet()
@@ -128,7 +128,7 @@ export const AddBookPage = () => {
                 height: "428px",
                 backgroundImage: inputImg === "" ? `url('${AddImg}')` : `url('${inputImg}')`,
                 backgroundSize: "cover",
-                backgroundPosition:"center",
+                backgroundPosition: "center",
                 cursor: "pointer"
               }}
             ></Box>
@@ -259,11 +259,7 @@ export const AddBookPage = () => {
                   {
                     genre?.map((item, index) =>
                       <MenuItem
-                        sx={{
-                          bgcolor: "#fff",
-                          "&:hover": { bgcolor: "#fff" },
-                          "&:active": { bgcolor: "#fff" }
-                        }} key={index} value={item.id}>
+                        sx={{ color: "#C9AC8C" }} key={index} value={item.id}>
                         {item.name}
                       </MenuItem>)
                   }
@@ -290,18 +286,14 @@ export const AddBookPage = () => {
                 >
                   {
                     afterId?.map((item, index) => <MenuItem
-                      sx={{
-                        bgcolor: "#fff",
-                        "&:hover": { bgcolor: "#fff" },
-                        "&:active": { bgcolor: "#fff" }
-                      }} key={index} value={item.id}>
+                      sx={{ color: "#C9AC8C" }} key={index} value={item.id}>
                       {item.first_name}{item.last_name}
                     </MenuItem>)
                   }
                 </TextField>
                 <FormHelperText error>{errors.author_id?.message}</FormHelperText>
                 <InputBase
-                   name='bio'
+                  name='bio'
                   placeholder={t("bio")}
                   {...register("description")}
                   sx={{

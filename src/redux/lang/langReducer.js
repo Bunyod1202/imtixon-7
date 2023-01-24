@@ -1,12 +1,12 @@
 import { LANG } from "./langTypes";
 
 const initialState = {
-  lang: localStorage.getItem('lang')||"",
+  lang: localStorage.getItem('lang') || "",
 }
 
 export const langReducter = (state = initialState, action) => {
 
-  switch (action.type) { 
+  switch (action.type) {
     case LANG:
       return {
         ...state,

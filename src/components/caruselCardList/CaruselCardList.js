@@ -17,7 +17,7 @@ export const CaruselCardList = (props) => {
           width: "100%"
         }}>
         {props.children}
-        </OwlCarousel>
+      </OwlCarousel>
     </>
   )
 }

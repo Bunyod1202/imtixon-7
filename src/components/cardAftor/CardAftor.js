@@ -4,7 +4,7 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import { api } from '../../API/API'
 import { CardAftorList } from './cardAftorList/CardAftorList'
 import { t } from 'i18next'
-export const CardAftor = ({afterGet}) => {
+export const CardAftor = ({ afterGet }) => {
 
   const [genre, setGenre] = useState([])
 
@@ -63,7 +63,7 @@ export const CardAftor = ({afterGet}) => {
             {
               genre.map((item, index) => <Route key={index} path={`/${item.id}`} end element={<CardAftorList afterGet={afterGet} id={item.id} />} />)
             }
-           
+
           </Routes>
         </Box>
       </Box>

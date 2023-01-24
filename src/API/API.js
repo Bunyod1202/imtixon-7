@@ -10,11 +10,11 @@ export const api = {
 
   LoginApi: (data) =>
     axios.post(BASE_URL + "/user/login", data),
-  
+
   RegisterApi: (data) =>
     axios.post(BASE_URL + "/user/register", data),
 
-  AddBookApi: (data,token) =>
+  AddBookApi: (data, token) =>
     axios.post(BASE_URL + "/book", data, {
       headers: {
         'Authorization': token
@@ -34,41 +34,41 @@ export const api = {
       }
     }),
 
-  BookGanreGet: (id,token) =>
+  BookGanreGet: (id, token) =>
     axios.get(BASE_URL + `/book/genreId/${id}`, {
       headers: {
         'Authorization': token
       }
     }),
 
-  AfterGanreGet: (id,token) =>
+  AfterGanreGet: (id, token) =>
     axios.get(BASE_URL + `/author/genreId/${id}`, {
       headers: {
         'Authorization': token
       }
     }),
 
-  AfterIdGet: (id,token) =>
+  AfterIdGet: (id, token) =>
     axios.get(BASE_URL + `/author/authorId/${id}`, {
       headers: {
         'Authorization': token
       }
     }),
-  
-    BookIdGet: (id,token) =>
+
+  BookIdGet: (id, token) =>
     axios.get(BASE_URL + `/book/bookId/${id}`, {
       headers: {
         'Authorization': token
       }
     }),
 
-  UserEditApi: (data,token) =>
+  UserEditApi: (data, token) =>
     axios.put(BASE_URL + "/user/account", data, {
       headers: {
         'Authorization': token
       }
     }),
-  
+
   AfterBookApi: (id, token) =>
     axios.get(BASE_URL + `/author/books/${id}`, {
       headers: {
@@ -76,14 +76,14 @@ export const api = {
       }
     }),
 
-  PasswordEditApi: (data,token) =>
+  PasswordEditApi: (data, token) =>
     axios.put(BASE_URL + "/user/security", data, {
       headers: {
         'Authorization': token
       }
     }),
 
-  AddAfterApi: (data,token) =>
+  AddAfterApi: (data, token) =>
     axios.post(BASE_URL + "/author", data, {
       headers: {
         'Authorization': token

@@ -7,6 +7,6 @@ export const rootReducer = combineReducers(
   {
     token: tokenReducter,
     theme: themeReducter,
-    lang:langReducter,
- }
+    lang: langReducter,
+  }
 )

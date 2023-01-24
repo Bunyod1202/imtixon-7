@@ -209,18 +209,18 @@ export const BookPage = () => {
                 textDecoration: "none"
               }} >{t("see_all")}</Link>
           </Box>
-       
+
 
           {
             dataAfterBook.length ? <CaruselCardList items={6}>
-            {
+              {
                 dataAfterBook?.map((item, index) => <BookCardItem key={index} item={item} />)
               }
-            </CaruselCardList>:""
-       
-      }
-               
-         
+            </CaruselCardList> : ""
+
+          }
+
+
         </Paper>
       </Container>
     </>

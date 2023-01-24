@@ -100,7 +100,7 @@ export const CaruserlBanner = () => {
           }} >
           <Typography
             sx={{
-              width: "40%",   
+              width: "40%",
               fontFamily: 'Aref',
               fontWeight: "400",
               fontSize: "61px",

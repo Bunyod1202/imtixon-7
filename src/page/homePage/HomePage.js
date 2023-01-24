@@ -10,10 +10,10 @@ import { t } from 'i18next'
 
 export const HomePage = () => {
   const [afterGet, setAfterGet] = useState([]);
-  const afterRef =useRef()
- 
+  const afterRef = useRef()
+
   const searchAfter = (evt) => {
-evt.preventDefault();
+    evt.preventDefault();
     const afterSearchGet = async () => {
       const cardCasts = await api.SearchAferApi(afterRef.current.value)
       setAfterGet(cardCasts.data)
@@ -53,7 +53,7 @@ evt.preventDefault();
               boxShadow: "0px 4px 77px rgba(0, 0, 0, 0.25)",
               borderRadius: "15px",
               padding: "29px 73px",
-      
+
             }}>
             <Box sx={{
 
@@ -74,7 +74,7 @@ evt.preventDefault();
                   <Stack direction="row" spacing={2}>
                     <InputBase
                       placeholder={t("Literature_books_audios_articles")}
-                     inputRef={afterRef}
+                      inputRef={afterRef}
                       sx={{
                         width: "100%",
                         padding: "12px 27px",

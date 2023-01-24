@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Stack, Box, Button, InputBase, Typography, Paper, Container } from '@mui/material'
 import { SearchIcon } from '../../assets/icons/Icon'
 import { CaruserlBanner } from '../../components/caruselBanner/CaruserlBanner'
@@ -10,24 +10,24 @@ export const BooksPage = () => {
 
   const [afterGet, setAfterGet] = useState([]);
 
-  const afterRef =useRef()
- 
+  const afterRef = useRef()
+
   const searchAfter = (evt) => {
-evt.preventDefault();
+    evt.preventDefault();
     const afterSearchGet = async () => {
       const cardCasts = await api.SearchBookApi(afterRef.current.value)
       setAfterGet(cardCasts.data)
     }
     if (afterRef.current.value !== "") {
-       
+
       afterSearchGet()
     } else {
       setAfterGet([])
-     }
+    }
 
   }
 
-  
+
   return (
     <>
       <Container

@@ -14,24 +14,24 @@ export const AdminPage = () => {
       <Paper
         sx={{
           width: '100%',
-          height:"100vh",
+          height: "100vh",
           bgcolor: 'background.default',
-          boxShadow:"0",
+          boxShadow: "0",
         }}>
         <Box >
           <List sx={{
             width: "100%",
             display: 'flex',
             padding: "0",
-            boxShadow:"0",
+            boxShadow: "0",
             bgcolor: "background.nav"
           }} >
             <ListItem
               sx={{
                 padding: "0",
                 margin: "0",
-                
-            }}>
+
+              }}>
               <Link
                 to="/admin/1"
                 component={NavLink}
@@ -39,10 +39,10 @@ export const AdminPage = () => {
                   width: "100%",
                   height: "100%",
                   display: "flex",
-                  alignItems:"center",
+                  alignItems: "center",
                   padding: "23px",
                   textDecoration: "none",
-                  margin:"0",
+                  margin: "0",
                   "&.active": {
                     bgcolor: "background.navActive",
                     "div": {
@@ -55,18 +55,18 @@ export const AdminPage = () => {
                   "div": {
                     bgcolor: "#E5EAEE",
                   },
-                 
+
                 }}>
                 <Box
                   sx={{
                     padding: '12px 20px',
                     backgroundColor: "#152540",
-                    color:"#fff",
+                    color: "#fff",
                     borderRadius: "4px",
-              }}  >1</Box>
+                  }}  >1</Box>
                 <Typography
                   sx={{
-                   
+
                     marginLeft: "9px",
                     fontFamily: 'Poppins',
                     fontWeight: "600",
@@ -75,21 +75,21 @@ export const AdminPage = () => {
                     color: "text.disabled",
                   }}
                 >Profile</Typography>
-            </Link>
+              </Link>
             </ListItem>
             <ListItem
-             sx={{
-              padding: "0",
-              margin:"0",
-          }}>
+              sx={{
+                padding: "0",
+                margin: "0",
+              }}>
               <Link
-                 to="/admin/2"
+                to="/admin/2"
                 component={NavLink}
                 sx={{
-                  width:"100%",
+                  width: "100%",
                   height: "100%",
                   display: "flex",
-                  alignItems:"center",
+                  alignItems: "center",
                   padding: "23px",
                   textDecoration: "none",
                   "&.active": {
@@ -112,12 +112,12 @@ export const AdminPage = () => {
                   sx={{
                     padding: '12px 20px',
                     backgroundColor: "#152540",
-                    color:"#fff",
+                    color: "#fff",
                     borderRadius: "4px",
-              }}  >2</Box>
+                  }}  >2</Box>
                 <Typography
                   sx={{
-                   
+
                     marginLeft: "9px",
                     fontFamily: 'Poppins',
                     fontWeight: "600",
@@ -126,20 +126,20 @@ export const AdminPage = () => {
                     color: "text.disabled",
                   }}
                 >{t("security")}</Typography>
-            </Link>
+              </Link>
             </ListItem>
             <ListItem sx={{
-                padding: "0",
-                margin:"0",
+              padding: "0",
+              margin: "0",
             }}>
               <Link
-                 to="/admin/3"
+                to="/admin/3"
                 component={NavLink}
                 sx={{
                   width: "100%",
                   height: "100%",
                   display: "flex",
-                  alignItems:"center",
+                  alignItems: "center",
                   padding: "23px",
                   textDecoration: "none",
                   "&.active": {
@@ -154,18 +154,18 @@ export const AdminPage = () => {
                   "div": {
                     bgcolor: "#E5EAEE",
                   },
-                 
+
                 }}>
                 <Box
                   sx={{
                     padding: '12px 20px',
                     backgroundColor: "#152540",
-                    color:"#fff",
+                    color: "#fff",
                     borderRadius: "4px",
-              }}  >3</Box>
+                  }}  >3</Box>
                 <Typography
                   sx={{
-                   
+
                     marginLeft: "9px",
                     fontFamily: 'Poppins',
                     fontWeight: "600",
@@ -174,21 +174,21 @@ export const AdminPage = () => {
                     color: "text.disabled",
                   }}
                 >{t("settings")}</Typography>
-            </Link>
-          </ListItem>
-        </List>
+              </Link>
+            </ListItem>
+          </List>
         </Box>
         <Box
           sx={{
-          paddingTop:"83px"
-        }}>
+            paddingTop: "83px"
+          }}>
           <Routes>
-            <Route path="/1" element={<UserEdit/>} />
-            <Route path="/2" element={<PasswordEdit/>} />
-            <Route path="/3" element={<SettingsControl/>} />
+            <Route path="/1" element={<UserEdit />} />
+            <Route path="/2" element={<PasswordEdit />} />
+            <Route path="/3" element={<SettingsControl />} />
           </Routes>
         </Box>
-    </Paper>
+      </Paper>
     </>
   )
 }

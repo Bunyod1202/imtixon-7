@@ -4,7 +4,7 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import { api } from '../../API/API'
 import { BookCardList } from './bookCardList/BookCardList'
 import { t } from 'i18next'
-export const BookCard = ({afterGet,setAfterGet}) => {
+export const BookCard = ({ afterGet, setAfterGet }) => {
 
   const [genre, setGenre] = useState([])
 
@@ -29,7 +29,7 @@ export const BookCard = ({afterGet,setAfterGet}) => {
             color: "#C9AC8C",
           }}
         >
-         {t("basic_categories")}
+          {t("basic_categories")}
         </Typography>
         <List
           sx={{
@@ -39,7 +39,7 @@ export const BookCard = ({afterGet,setAfterGet}) => {
           }}>
           {
             genre?.map((item, index) =>
-              <ListItem key={index} sx={{ width: "180px" }} onClick={()=>setAfterGet([])}>
+              <ListItem key={index} sx={{ width: "180px" }} onClick={() => setAfterGet([])}>
                 <Link
                   to={`${item.id}`}
                   component={NavLink}
@@ -63,7 +63,7 @@ export const BookCard = ({afterGet,setAfterGet}) => {
         </List>
         <Box marginTop="40px">
           <Routes>
-          {
+            {
               genre.map((item, index) => <Route key={index} path={`/${item.id}`} end element={<BookCardList id={item.id} afterGet={afterGet} />} />)
             }
           </Routes>

@@ -4,7 +4,7 @@ import { Box, Container } from '@mui/system'
 import React, { useRef } from 'react'
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { langEdit } from '../../redux/lang/langActions';
 import { themeEdit } from '../../redux/thrme/themeActions';
 

@@ -49,9 +49,9 @@ export const AddAfterPage = () => {
   } = useForm({
     mode: 'all',
     defaultValues: {
-      first_name : '',
-      last_name : '',
-      date_of_birth : "",
+      first_name: '',
+      last_name: '',
+      date_of_birth: "",
       date_of_death: '',
       country: '',
       genre_id: '',
@@ -72,7 +72,7 @@ export const AddAfterPage = () => {
     formData.append("bio", data.bio)
     formData.append("image", inputImgAdd)
     const afterApiAdd = async () => {
-      const cardCasts = await api.AddAfterApi(formData,token_id)
+      const cardCasts = await api.AddAfterApi(formData, token_id)
       if (cardCasts.status === 201) {
         navigator(-1)
       }
@@ -94,12 +94,12 @@ export const AddAfterPage = () => {
 
   return (
     <>
-        <Paper
+      <Paper
         sx={{
           width: "100%",
           display: 'flex',
           height: "100vh",
-          bgcolor:"background.default"
+          bgcolor: "background.default"
         }}>
         <Box
           sx={{
@@ -110,19 +110,19 @@ export const AddAfterPage = () => {
             alignItems: "center"
           }}
         >
-          
+
           <label>
             <Box
               sx={{
                 width: "315px",
                 height: "428px",
-                backgroundImage: inputImg === "" ?`url('${AddImg}')`:`url('${inputImg}')`,
+                backgroundImage: inputImg === "" ? `url('${AddImg}')` : `url('${inputImg}')`,
                 backgroundSize: "cover",
-                backgroundPosition:"center",
+                backgroundPosition: "center",
                 cursor: "pointer"
-            }}
+              }}
             ></Box>
-          <InputBase
+            <InputBase
               type="file"
               onChange={addImg}
               sx={{
@@ -140,7 +140,7 @@ export const AddAfterPage = () => {
           </label>
 
         </Box>
-         <Box
+        <Box
           sx={{
             width: "50%",
             display: "flex",
@@ -148,156 +148,156 @@ export const AddAfterPage = () => {
             alignItems: "center"
           }}
         >       <Box
-        sx={{
-          width: "330px"
-        }}>
-        <Typography
           sx={{
-            fontFamily: 'Poppins',
-            fontWeight: "900",
-            fontSize: "32px",
-            lineHeight: "48px",
-            color: "text.primary",
+            width: "330px"
           }}>
-        {t("add_author")}
-        </Typography>
+            <Typography
+              sx={{
+                fontFamily: 'Poppins',
+                fontWeight: "900",
+                fontSize: "32px",
+                lineHeight: "48px",
+                color: "text.primary",
+              }}>
+              {t("add_author")}
+            </Typography>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={1}>
-            <InputBase
-              placeholder={t("first_name")}
-              {...register("first_name")}
-              sx={{
-                padding: "5px 29px",
-                border: "1px solid #B4B4BB",
-                borderRadius: "10px",
-                fontFamily: 'Poppins',
-                fontWeight: "400",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#AAAAAA",
-              }} />
-            <FormHelperText error>{errors.first_name?.message}</FormHelperText>
-            <InputBase
-              placeholder={t("last_name")}
-              {...register("last_name")}
-              sx={{
-                padding: "5px 29px",
-                border: "1px solid #B4B4BB",
-                borderRadius: "10px",
-                fontFamily: 'Poppins',
-                fontWeight: "400",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#AAAAAA",
-              }} />
-            <FormHelperText error>{errors.last_name?.message}</FormHelperText>
-            <InputBase
-              placeholder={t("date_of_birth")}
-              {...register("date_of_birth")}
-              sx={{
-                padding: "5px 29px",
-                border: "1px solid #B4B4BB",
-                borderRadius: "10px",
-                fontFamily: 'Poppins',
-                fontWeight: "400",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#AAAAAA",
-              }} />
-            <FormHelperText error>{errors.date_of_birth?.message}</FormHelperText>
-            <InputBase
-              placeholder={t("date_of_death")}
-              {...register("date_of_death")}
-              sx={{
-                padding: "5px 29px",
-                border: "1px solid #B4B4BB",
-                borderRadius: "10px",
-                fontFamily: 'Poppins',
-                fontWeight: "400",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#AAAAAA",
-              }} />
-            <FormHelperText error>{errors.date_of_death?.message}</FormHelperText>
-            <InputBase
-              placeholder={t("country")}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack spacing={1}>
+                <InputBase
+                  placeholder={t("first_name")}
+                  {...register("first_name")}
+                  sx={{
+                    padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }} />
+                <FormHelperText error>{errors.first_name?.message}</FormHelperText>
+                <InputBase
+                  placeholder={t("last_name")}
+                  {...register("last_name")}
+                  sx={{
+                    padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }} />
+                <FormHelperText error>{errors.last_name?.message}</FormHelperText>
+                <InputBase
+                  placeholder={t("date_of_birth")}
+                  {...register("date_of_birth")}
+                  sx={{
+                    padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }} />
+                <FormHelperText error>{errors.date_of_birth?.message}</FormHelperText>
+                <InputBase
+                  placeholder={t("date_of_death")}
+                  {...register("date_of_death")}
+                  sx={{
+                    padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }} />
+                <FormHelperText error>{errors.date_of_death?.message}</FormHelperText>
+                <InputBase
+                  placeholder={t("country")}
                   {...register("country")}
-              sx={{
-                padding: "5px 29px",
-                border: "1px solid #B4B4BB",
-                borderRadius: "10px",
-                fontFamily: 'Poppins',
-                fontWeight: "400",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#AAAAAA",
-              }}
-            />
+                  sx={{
+                    padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }}
+                />
                 <FormHelperText error>{errors.country?.message}</FormHelperText>
-                <TextField  label={t("genre")} 
-                 sx={{
-                  // padding: "5px 29px",
-                  border: "1px solid #B4B4BB",
-                  borderRadius: "10px",
-                  fontFamily: 'Poppins',
-                  fontWeight: "400",
-                  fontSize: "14px",
-                  lineHeight: "16px",
-                  color: "#AAAAAA",
-                }}
-                {...register("genre_id")}
-                defaultValue=""
-                select
-              >
+                <TextField label={t("genre")}
+                  sx={{
+                    // padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }}
+                  {...register("genre_id")}
+                  defaultValue=""
+                  select
+                >
                   {
-                    genre?.map((item, index) => <MenuItem sx={{bgcolor:"#fff" ,"&:hover":{bgcolor:"#fff"},"&:active":{bgcolor:"#fff"}}}  key={index} value={item.id}> 
+                    genre?.map((item, index) => <MenuItem sx={{ color: "#C9AC8C" }} key={index} value={item.id}>
                       {item.name}
                     </MenuItem>)
                   }
-              </TextField>
-            
+                </TextField>
+
                 <FormHelperText error>{errors.genre_id?.message}</FormHelperText>
                 <InputBase
-              placeholder={t("bio")}
-              {...register("bio")}
+                  placeholder={t("bio")}
+                  {...register("bio")}
                   sx={{
                     display: "block",
-                height:"82px",
-                padding: "5px 29px",
-                border: "1px solid #B4B4BB",
-                borderRadius: "10px",
-                fontFamily: 'Poppins',
-                fontWeight: "400",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#AAAAAA",
-              }}
-             
-            />
-            <FormHelperText error>{errors.bio?.message}</FormHelperText>
-          </Stack>
-          <Button
-            disabled={!isValid}
-            type="submit"
-            sx={{
-              width: "100%",
-              marginTop: "34px",
-              bgcolor: "button.primary",
-              fontFamily: 'Poppins',
-              fontWeight: "500",
-              fontSize: "18px",
-              lineHeight: "25px",
-              borderRadius: "99px",
-              color: "text.btn",
-              "&:disabled": {
-                color: "text.disabled",
-              }
-            }} >{t("next_step")}</Button>
-        </form>
+                    height: "82px",
+                    padding: "5px 29px",
+                    border: "1px solid #B4B4BB",
+                    borderRadius: "10px",
+                    fontFamily: 'Poppins',
+                    fontWeight: "400",
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    color: "#AAAAAA",
+                  }}
+
+                />
+                <FormHelperText error>{errors.bio?.message}</FormHelperText>
+              </Stack>
+              <Button
+                disabled={!isValid}
+                type="submit"
+                sx={{
+                  width: "100%",
+                  marginTop: "34px",
+                  bgcolor: "button.primary",
+                  fontFamily: 'Poppins',
+                  fontWeight: "500",
+                  fontSize: "18px",
+                  lineHeight: "25px",
+                  borderRadius: "99px",
+                  color: "text.btn",
+                  "&:disabled": {
+                    color: "text.disabled",
+                  }
+                }} >{t("next_step")}</Button>
+            </form>
           </Box>
         </Box>
-        </Paper>
+      </Paper>
     </>
   )
 }

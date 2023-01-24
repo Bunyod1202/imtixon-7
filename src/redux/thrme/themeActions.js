@@ -5,6 +5,6 @@ export const themeEdit = (theme) => {
 
   return {
     type: THEME,
-    paylod:theme
+    paylod: theme
   }
 }

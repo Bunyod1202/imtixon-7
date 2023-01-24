@@ -15,25 +15,25 @@ export const AfterPage = () => {
 
 
   const [data, setData] = useState({ id })
-  
+
   const [dataAfterBook, setDataAfterBook] = useState([])
-  
-  const afterGanreGet = async (id,token_id) => {
-    const cardCasts = await api.AfterIdGet(id,token_id)
+
+  const afterGanreGet = async (id, token_id) => {
+    const cardCasts = await api.AfterIdGet(id, token_id)
     setData(cardCasts.data)
   }
   useEffect(() => {
-    afterGanreGet(id,token_id)
+    afterGanreGet(id, token_id)
   }, [id, token_id])
 
-    const afterBookGet = async (id,token_id) => {
-    const cardCasts = await api.AfterBookApi(id,token_id)
+  const afterBookGet = async (id, token_id) => {
+    const cardCasts = await api.AfterBookApi(id, token_id)
     setDataAfterBook(cardCasts.data)
   }
   useEffect(() => {
-    afterBookGet(id,token_id)
+    afterBookGet(id, token_id)
   }, [id, token_id])
-  
+
   return (
     <>
       <Container
@@ -51,7 +51,7 @@ export const AfterPage = () => {
             sx={{
               marginRight: "64px"
             }}>
-            <img width={505} height={681} src={ BASE_URL +"/"+ data.image} alt="adib" />
+            <img width={505} height={681} src={BASE_URL + "/" + data.image} alt="adib" />
           </Box>
           <Box>
             <Typography
@@ -167,7 +167,7 @@ export const AfterPage = () => {
                 lineHeight: "46px",
                 color: "#D1B89D",
               }}>
-                {t("works")}
+              {t("works")}
             </Typography>
             <Link
               component={NavLink}
@@ -181,15 +181,15 @@ export const AfterPage = () => {
                 textDecoration: "none"
               }} >{t("see_all")}</Link>
           </Box>
-        
+
           {
             dataAfterBook.length ? <CaruselCardList items={6}>
-            {
+              {
                 dataAfterBook?.map((item, index) => <BookCardItem key={index} item={item} />)
               }
-            </CaruselCardList>:""
-       
-      }
+            </CaruselCardList> : ""
+
+          }
         </Paper>
       </Container>
     </>

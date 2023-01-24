@@ -16,7 +16,7 @@ export const Header = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-let userName = user.first_name + user.last_name
+  let userName = user.first_name + user.last_name
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -124,7 +124,7 @@ let userName = user.first_name + user.last_name
                   </IconButton>
                 </Tooltip>
                 <Menu
-                  sx={{ mt: '45px' , }}
+                  sx={{ mt: '45px', }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
@@ -139,25 +139,16 @@ let userName = user.first_name + user.last_name
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem sx={{
-               
-                    
-                  }}>
+                  <MenuItem>
                     <Link component={NavLink} to="/admin/1" color={"#D1B89D"} textAlign="center">Profile</Link>
                   </MenuItem>
-                  <MenuItem sx={{
-                   
-                  }} >
+                  <MenuItem  >
                     <Link component={NavLink} to="/add-after" color={"#D1B89D"} textAlign="center">Add author</Link>
                   </MenuItem>
-                  <MenuItem sx={{
-                 
-                  }} >
+                  <MenuItem >
                     <Link component={NavLink} to="/add-book" color={"#D1B89D"} textAlign="center">Add book</Link>
                   </MenuItem>
-                  <MenuItem sx={{
-                  
-                  }} >
+                  <MenuItem>
                     <Link component={NavLink} to="/login" color={"#D1B89D"} onClick={() => {
                       dispatch(TokenRegisterRemuve(""));
                       localStorage.removeItem('token')

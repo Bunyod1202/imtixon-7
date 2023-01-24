@@ -1,12 +1,12 @@
 import { THEME } from "./themeTypes";
 
 const initialState = {
-  theme: localStorage.getItem('theme')||"",
+  theme: localStorage.getItem('theme') || "",
 }
 
 export const themeReducter = (state = initialState, action) => {
 
-  switch (action.type) { 
+  switch (action.type) {
     case THEME:
       return {
         ...state,

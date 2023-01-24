@@ -53,12 +53,12 @@ export const LoginPage = () => {
   }
   return (
     <>
-         <Paper
+      <Paper
         sx={{
           width: "100%",
           display: 'flex',
           height: "100vh",
-          bgcolor:"background.default"
+          bgcolor: "background.default"
         }}>
         <Box
           sx={{
@@ -90,7 +90,7 @@ export const LoginPage = () => {
                 lineHeight: "51px",
                 color: "text.primary",
               }}>
-             {t("sign_in")}
+              {t("sign_in")}
             </Typography>
             <Typography
               sx={{
@@ -102,17 +102,17 @@ export const LoginPage = () => {
                 lineHeight: "15px",
                 color: "text.primary",
               }}>
-            {t("already_account")}
+              {t("already_account")}
               <Link component={NavLink} to="/register" sx={{ color: "#549FF9", textDecoration: "none" }}>{t("sign_up")}</Link>
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={2}>
                 <InputBase
-                type='email'
-                          {...register("email")}
+                  type='email'
+                  {...register("email")}
                   placeholder={t("email")}
                   sx={{
-                    padding:"5px 29px",
+                    padding: "5px 29px",
                     border: "1px solid #B4B4BB",
                     borderRadius: "10px",
                     fontFamily: 'Poppins',
@@ -121,13 +121,13 @@ export const LoginPage = () => {
                     lineHeight: "16px",
                     color: "#AAAAAA",
                   }} />
-                                <FormHelperText error>{errors.email?.message}</FormHelperText>
+                <FormHelperText error>{errors.email?.message}</FormHelperText>
                 <InputBase
-                type='password'
-                      {...register("password")}
+                  type='password'
+                  {...register("password")}
                   placeholder={t("password")}
                   sx={{
-                    padding:"5px 29px",
+                    padding: "5px 29px",
                     border: "1px solid #B4B4BB",
                     borderRadius: "10px",
                     fontFamily: 'Poppins',
@@ -136,14 +136,14 @@ export const LoginPage = () => {
                     lineHeight: "16px",
                     color: "#AAAAAA",
                   }} />
-                   <FormHelperText error>{errors.password?.message}</FormHelperText>
+                <FormHelperText error>{errors.password?.message}</FormHelperText>
               </Stack>
               <Button
                 type="submit"
                 disabled={!isValid}
                 sx={{
                   width: "100%",
-                  marginTop:"34px",
+                  marginTop: "34px",
                   bgcolor: "button.primary",
                   fontFamily: 'Poppins',
                   fontWeight: "500",

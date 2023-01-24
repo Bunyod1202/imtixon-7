@@ -48,11 +48,11 @@ export const UserEdit = () => {
     formData.append("phone", data.phone)
     formData.append("image", inputImgAdd)
     const ApiUserEdit = async () => {
-      const cardCasts = await api.UserEditApi(formData,token_id)
+      const cardCasts = await api.UserEditApi(formData, token_id)
       if (cardCasts.status === 201) {
-       
+
       }
-   
+
     }
     ApiUserEdit()
   }
@@ -97,8 +97,8 @@ export const UserEdit = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    cursor:"pointer",
-                    boxShadow:"0",
+                    cursor: "pointer",
+                    boxShadow: "0",
                     width: "50px",
                     height: "50px",
                     position: "absolute",

@@ -1,13 +1,39 @@
 import { Box, Container, Link, Paper, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../../components/header/Header'
-import AdibImg from "../../assets/image/Rectangle 3.png"
 import { CaruselCardList } from '../../components/caruselCardList/CaruselCardList'
 import { BookCardItem } from '../../components/bookCard/bookCardItem/BookCardItem'
 import { useTranslation } from 'react-i18next'
+import { NavLink, useParams } from 'react-router-dom'
+import { api, BASE_URL } from '../../API/API'
+import { useSelector } from 'react-redux'
 
 export const AfterPage = () => {
+  const token_id = useSelector((state) => state.token.token)
   const { t } = useTranslation();
+  const { id } = useParams()
+
+
+  const [data, setData] = useState({ id })
+  
+  const [dataAfterBook, setDataAfterBook] = useState([])
+  
+  const afterGanreGet = async (id,token_id) => {
+    const cardCasts = await api.AfterIdGet(id,token_id)
+    setData(cardCasts.data)
+  }
+  useEffect(() => {
+    afterGanreGet(id,token_id)
+  }, [id, token_id])
+
+    const afterBookGet = async (id,token_id) => {
+    const cardCasts = await api.AfterBookApi(id,token_id)
+    setDataAfterBook(cardCasts.data)
+  }
+  useEffect(() => {
+    afterBookGet(id,token_id)
+  }, [id, token_id])
+  
   return (
     <>
       <Container
@@ -25,7 +51,7 @@ export const AfterPage = () => {
             sx={{
               marginRight: "64px"
             }}>
-            <img src={AdibImg} alt="adib" />
+            <img width={505} height={681} src={ BASE_URL +"/"+ data.image} alt="adib" />
           </Box>
           <Box>
             <Typography
@@ -37,7 +63,7 @@ export const AfterPage = () => {
                 lineHeight: "72px",
                 color: "#C9AC8C",
               }}
-            >O’tkir Hoshimov</Typography>
+            >{data.first_name} {data.last_name}</Typography>
             <Typography
               sx={{
                 marginTop: "30px",
@@ -47,7 +73,7 @@ export const AfterPage = () => {
                 lineHeight: "24px",
                 color: "text.primary",
               }}
-            >Oʻtkir Hoshimov 1941 yil Toshkent viloyatining Zangiota (hozirgi Chilonzor) tumanidagi Doʻmbiravot mavzeida tugʻildi. Oʻ. Hoshimov mehnat faoliyatini erta boshladi. Toshkent Davlat universiteti (hozirgi Oʻzbekiston Milliy universiteti)ning jurnalistika kulliyotida oʻqish bilan baravar gazeta tahririyatida ishladi. 1959 yildan 1963 yilgacha “Temiryoʻlchi”, “Qizil Oʻzbekiston”, “Transportniy rabochiy” gazetalarida xat tashuvchi, mussaxhih, tarjimon boʻlib ishladi. Soʻng “Toshkent haqiqati” gazetasida adabiy xodim (1963–1966), “Toshkent oqshomi” gazetasida boʻlim mudiri (1966–1982), Gʻ. Gʻulom nomidagi Adabiyot va sanʼat nashriyotida bosh muharrir oʻrinbosari (1982–1985) boʻldi. 1985–1995 yillarda “Sharq yulduzi” jurnaliga bosh muharrirlik qildi. 1995 yildan 2005 yilgacha Oʻzbekiston Respublikasi Oliy Majlisining Matbuot va axborot qoʻmitasi raisi lavozimida ishladi. 2005 yildan “Teatr“ jurnalida bosh muharrir boʻlib ishladi.</Typography>
+            >{data.bio}</Typography>
             <Box
               sx={{
                 // width: "400px",
@@ -72,7 +98,7 @@ export const AfterPage = () => {
                     fontSize: "39px",
                     lineHeight: "144.4%",
                     color: "#C9AC8C",
-                  }}>1941</Typography>
+                  }}>{data.date_of_birth}</Typography>
                 <Typography
                   sx={{
                     fontFamily: 'Poppins',
@@ -80,7 +106,7 @@ export const AfterPage = () => {
                     fontSize: "12px",
                     lineHeight: "18px",
                     color: "text.disabled",
-                  }}>Toshkent, Uzbekistan</Typography>
+                  }}>{data.country}</Typography>
               </Box>
               <Box
                 sx={{
@@ -106,7 +132,7 @@ export const AfterPage = () => {
                     fontSize: "39px",
                     lineHeight: "144.4%",
                     color: "#C9AC8C",
-                  }}>2013</Typography>
+                  }}>{data.date_of_death}</Typography>
                 <Typography
                   sx={{
                     fontFamily: 'Poppins',
@@ -114,7 +140,7 @@ export const AfterPage = () => {
                     fontSize: "12px",
                     lineHeight: "18px",
                     color: "text.disabled",
-                  }}>Toshkent, Uzbekistan</Typography>
+                  }}>{data.country}</Typography>
               </Box>
             </Box>
           </Box>
@@ -144,6 +170,8 @@ export const AfterPage = () => {
                 {t("works")}
             </Typography>
             <Link
+              component={NavLink}
+              to="/books/1"
               sx={{
                 fontFamily: 'Poppins',
                 fontWeight: "400",
@@ -153,13 +181,15 @@ export const AfterPage = () => {
                 textDecoration: "none"
               }} >{t("see_all")}</Link>
           </Box>
-          <CaruselCardList items={6}>
-            <BookCardItem />
-            <BookCardItem />
-            <BookCardItem />
-            <BookCardItem />
-            <BookCardItem />
-          </CaruselCardList>
+        
+          {
+            dataAfterBook.length ? <CaruselCardList items={6}>
+            {
+                dataAfterBook?.map((item, index) => <BookCardItem key={index} item={item} />)
+              }
+            </CaruselCardList>:""
+       
+      }
         </Paper>
       </Container>
     </>

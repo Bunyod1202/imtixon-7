@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Stack, Box, Button, InputBase, Typography, Paper, Container } from '@mui/material'
 import { SearchIcon } from '../../assets/icons/Icon'
 import { CardAftor } from '../../components/cardAftor/CardAftor'
 import { CaruserlBanner } from '../../components/caruselBanner/CaruserlBanner'
 import { Header } from '../../components/header/Header'
+import { api } from '../../API/API'
+import { useRef } from 'react'
+import { t } from 'i18next'
 
 export const HomePage = () => {
+  const [afterGet, setAfterGet] = useState([]);
+  const afterRef =useRef()
+ 
+  const searchAfter = (evt) => {
+evt.preventDefault();
+    const afterSearchGet = async () => {
+      const cardCasts = await api.SearchAferApi(afterRef.current.value)
+      setAfterGet(cardCasts.data)
+    }
+    if (afterRef.current.value !== "") {
+      afterSearchGet()
+    } else {
+      setAfterGet([])
+    }
+
+  }
+
   return (
     <>
       <Container
@@ -32,7 +52,8 @@ export const HomePage = () => {
               bgcolor: 'background.default',
               boxShadow: "0px 4px 77px rgba(0, 0, 0, 0.25)",
               borderRadius: "15px",
-              padding: "29px 73px"
+              padding: "29px 73px",
+      
             }}>
             <Box sx={{
 
@@ -47,12 +68,13 @@ export const HomePage = () => {
                   color: "#C9AC8C",
                   textAlign: "center"
                 }}
-              >Qidirish</Typography>
+              >{t("search")}</Typography>
               <Box>
-                <form>
+                <form onSubmit={searchAfter}>
                   <Stack direction="row" spacing={2}>
                     <InputBase
-                      placeholder='Adiblar, kitoblar, audiolar, maqolalar...'
+                      placeholder={t("Literature_books_audios_articles")}
+                     inputRef={afterRef}
                       sx={{
                         width: "100%",
                         padding: "12px 27px",
@@ -70,6 +92,7 @@ export const HomePage = () => {
                         }
                       }} />
                     <Button
+                      type='submit'
                       sx={{
                         backgroundColor: "#C9AC8C",
                         borderRadius: "15px",
@@ -80,14 +103,14 @@ export const HomePage = () => {
                         }
                       }}
                       startIcon={<SearchIcon />}
-                    >Izlash</Button>
+                    >{t("search")}</Button>
                   </Stack>
                 </form>
               </Box>
             </Box>
           </Paper>
         </Box>
-        <CardAftor />
+        <CardAftor afterGet={afterGet} />
       </Container>
 
     </>

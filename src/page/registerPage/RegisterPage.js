@@ -8,7 +8,7 @@ import SigenUpImg from "../../assets/image/sigenup.png"
 import { useDispatch } from 'react-redux';
 import { TokenRegisterAdd } from '../../redux/token/tokenActions';
 import { api } from '../../API/API';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export const RegisterPage = () => {
@@ -46,17 +46,14 @@ export const RegisterPage = () => {
   })
 
   const onSubmit = (data) => {
-    console.log(data);
     const RegisterApiUser = async () => {
       const cardCasts = await api.RegisterApi(data)
       
       if (cardCasts.status === 201) {
         localStorage.setItem('token', JSON.stringify(cardCasts.data.token));
         dispatch(TokenRegisterAdd({ token: cardCasts.data.token }))
-        navigator("/login")
+        navigator("/home/1")
       }
-      console.log(cardCasts);
-
     }
     RegisterApiUser()
   }
@@ -112,7 +109,7 @@ export const RegisterPage = () => {
                 color: "text.primary",
               }}>
               {t("already_account")}
-              <Link sx={{ color: "#549FF9", textDecoration: "none" }}>{t("sign_in")}</Link>
+              <Link component={NavLink} to="/login" sx={{ color: "#549FF9", textDecoration: "none" }}>{t("sign_in")}</Link>
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={2}>

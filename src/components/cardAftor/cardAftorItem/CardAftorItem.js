@@ -1,30 +1,34 @@
 import React from 'react'
 import { Card, CardContent, CardMedia, Link, Typography } from '@mui/material'
 import { Link as RoutLink } from 'react-router-dom'
-import AvloniyImg from "../../../assets/image/avloniy.png"
-export const CardAftorItem = () => {
+import { BASE_URL } from '../../../API/API'
+import CardImg from "../../../assets/image/cardbg.png"
+export const CardAftorItem = ({ item }) => {
+  const {date_of_birth,date_of_death,first_name,last_name,image,id}= item
   return (
     <>
       <Card
         sx={{
           width: "295px",
           bgcolor: "background.card_collor",
+          backgroundImage: `url('${CardImg}')`, 
+          backgroundSize: "cover",
           marginBottom: "24px",
           borderRadius: "23px"
         }}>
         <Link
           component={RoutLink}
-          to="/"
+          to={`/after/${id}`}
           sx={{
             textDecoration: "none"
           }}>
         <CardMedia
           sx={{ height: 224 }}
-          image={AvloniyImg}
+          image={ BASE_URL +"/"+ image}
           title="green iguana"
         />
         <CardContent sx={{
-          bgcolor: "background.card_collor",
+          // bgcolor: "background.card_collor",
         }}>
           <Typography
             gutterBottom
@@ -37,7 +41,7 @@ export const CardAftorItem = () => {
               color: "text.card_title",
             }}
             component="div">
-            Abdulla Avloniy
+            {first_name} {last_name}
           </Typography>
           <Typography
             variant="body2"
@@ -50,7 +54,7 @@ export const CardAftorItem = () => {
               color: "link.primary",
               marginBottom: "63px"
             }}>
-            1878-1934
+            {date_of_birth}-{date_of_death}
           </Typography>
           </CardContent>
           </Link>

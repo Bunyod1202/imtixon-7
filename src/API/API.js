@@ -1,8 +1,8 @@
 import axios from "axios"
 
-const BASE_URL = "http://localhost:5000"
-export const API_IMG_URL = ""
 
+
+export const BASE_URL = "http://localhost:5000"
 export const api = {
 
   GenreGet: () =>
@@ -10,23 +10,85 @@ export const api = {
 
   LoginApi: (data) =>
     axios.post(BASE_URL + "/user/login", data),
+  
+  RegisterApi: (data) =>
+    axios.post(BASE_URL + "/user/register", data),
 
-  AddBookApi: (data) =>
-    axios.post(BASE_URL + "/book", data),
+  AddBookApi: (data,token) =>
+    axios.post(BASE_URL + "/book", data, {
+      headers: {
+        'Authorization': token
+      }
+    }),
 
-  AddAfterApi: (data) =>
-    axios.post(BASE_URL + "/author", data,{
-          headers: {
-         'Authorization':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6IkJ1bnlvZCIsImxhc3RfbmFtZSI6IkFnemFteG9qYXlldiIsInBob25lIjoiOTAwOTkyOTI2IiwiZW1haWwiOiJidW55b2RidW55b2QwMzVAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMDUkRzdIa21TV3JSYXdxM3p2R2FkNzlULlVnd2VkYmtUWmhTcUpoY0x6aTEzeElLUmc3bENQc0siLCJpYXQiOjE2NzQyMTUwMTZ9.eu8t3j_P2W3M2nCtuUUJtfit8yToZjKY-ZAI-V0hyaQ"
-          }
-        }),
+  SearchAferApi: (name) =>
+    axios.get(BASE_URL + `/author/search?author=${name}`),
 
-  // UserEditApi: (data, token) =>
-  //   axios.put(BASE_URL + "/user/put", data, {
-  //     headers: {
-  //       'token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NzM5NzkxMTF9.alk2mrYshgDA_UFXVI2ACLKH4Ro57Fw-nXGhiyI2xBs"
-  //     }
-  //   }),
+  SearchBookApi: (name) =>
+    axios.get(BASE_URL + `/book/search?book=${name}`),
+
+  UserGet: (token) =>
+    axios.get(BASE_URL + "/user/me", {
+      headers: {
+        'Authorization': token
+      }
+    }),
+
+  BookGanreGet: (id,token) =>
+    axios.get(BASE_URL + `/book/genreId/${id}`, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+
+  AfterGanreGet: (id,token) =>
+    axios.get(BASE_URL + `/author/genreId/${id}`, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+
+  AfterIdGet: (id,token) =>
+    axios.get(BASE_URL + `/author/authorId/${id}`, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+  
+    BookIdGet: (id,token) =>
+    axios.get(BASE_URL + `/book/bookId/${id}`, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+
+  UserEditApi: (data,token) =>
+    axios.put(BASE_URL + "/user/account", data, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+  
+  AfterBookApi: (id, token) =>
+    axios.get(BASE_URL + `/author/books/${id}`, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+
+  PasswordEditApi: (data,token) =>
+    axios.put(BASE_URL + "/user/security", data, {
+      headers: {
+        'Authorization': token
+      }
+    }),
+
+  AddAfterApi: (data,token) =>
+    axios.post(BASE_URL + "/author", data, {
+      headers: {
+        'Authorization': token
+      }
+    }),
 
 }
 

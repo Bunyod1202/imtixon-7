@@ -3,14 +3,13 @@ import { Box, Link, List, ListItem, Typography } from '@mui/material'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { api } from '../../API/API'
 import { CardAftorList } from './cardAftorList/CardAftorList'
-
-export const CardAftor = () => {
+import { t } from 'i18next'
+export const CardAftor = ({afterGet}) => {
 
   const [genre, setGenre] = useState([])
 
   const genreGet = async (data) => {
     const cardCasts = await api.GenreGet(data)
-    console.log(cardCasts);
     setGenre(cardCasts.data)
   }
   useEffect(() => {
@@ -30,7 +29,7 @@ export const CardAftor = () => {
             color: "#C9AC8C",
           }}
         >
-          Asosiy kategoriyalar
+          {t("basic_categories")}
         </Typography>
         <List
           sx={{
@@ -61,10 +60,10 @@ export const CardAftor = () => {
         </List>
         <Box marginTop="40px">
           <Routes>
-            <Route path='/1' end element={<CardAftorList />} />
-            <Route path='/2' element={<CardAftorList />} />
-            <Route path='/3' element={<CardAftorList />} />
-            <Route path='/4' element={<CardAftorList />} />
+            {
+              genre.map((item, index) => <Route key={index} path={`/${item.id}`} end element={<CardAftorList afterGet={afterGet} id={item.id} />} />)
+            }
+           
           </Routes>
         </Box>
       </Box>

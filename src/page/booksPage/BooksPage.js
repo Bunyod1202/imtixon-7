@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Stack, Box, Button, InputBase, Typography, Paper, Container } from '@mui/material'
 import { SearchIcon } from '../../assets/icons/Icon'
 import { CaruserlBanner } from '../../components/caruselBanner/CaruserlBanner'
 import { BookCard } from '../../components/bookCard/BookCard'
 import { Header } from '../../components/header/Header'
-
+import { api } from '../../API/API'
+import { t } from 'i18next'
 export const BooksPage = () => {
+
+  const [afterGet, setAfterGet] = useState([]);
+
+  const afterRef =useRef()
+ 
+  const searchAfter = (evt) => {
+evt.preventDefault();
+    const afterSearchGet = async () => {
+      const cardCasts = await api.SearchBookApi(afterRef.current.value)
+      setAfterGet(cardCasts.data)
+    }
+    if (afterRef.current.value !== "") {
+       
+      afterSearchGet()
+    } else {
+      setAfterGet([])
+     }
+
+  }
+
+  
   return (
     <>
       <Container
@@ -45,12 +67,13 @@ export const BooksPage = () => {
                   color: "#C9AC8C",
                   textAlign: "center"
                 }}
-              >Qidirish</Typography>
+              >{t("search")}</Typography>
               <Box>
-                <form>
+                <form onSubmit={searchAfter}>
                   <Stack direction="row" spacing={2}>
                     <InputBase
-                      placeholder='Adiblar, kitoblar, audiolar, maqolalar...'
+                      inputRef={afterRef}
+                      placeholder={t("Literature_books_audios_articles")}
                       sx={{
                         width: "100%",
                         padding: "12px 27px",
@@ -68,6 +91,7 @@ export const BooksPage = () => {
                         }
                       }} />
                     <Button
+                      type='submit'
                       sx={{
                         backgroundColor: "#C9AC8C",
                         borderRadius: "15px",
@@ -78,14 +102,14 @@ export const BooksPage = () => {
                         }
                       }}
                       startIcon={<SearchIcon />}
-                    >Izlash</Button>
+                    >{t("search")}</Button>
                   </Stack>
                 </form>
               </Box>
             </Box>
           </Paper>
         </Box>
-        <BookCard />
+        <BookCard setAfterGet={setAfterGet} afterGet={afterGet} />
       </Container>
 
     </>

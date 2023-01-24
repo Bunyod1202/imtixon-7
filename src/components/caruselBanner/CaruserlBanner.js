@@ -34,7 +34,7 @@ export const CaruserlBanner = () => {
           }} >
           <Typography
             sx={{
-              width: "337px",
+              width: "40%",
               fontFamily: 'Aref',
               fontWeight: "400",
               fontSize: "61px",
@@ -56,7 +56,7 @@ export const CaruserlBanner = () => {
           }} >
           <Typography
             sx={{
-              width: "337px",
+              width: "40%",
               fontFamily: 'Aref',
               fontWeight: "400",
               fontSize: "61px",
@@ -78,7 +78,7 @@ export const CaruserlBanner = () => {
           }} >
           <Typography
             sx={{
-              width: "337px",
+              width: "40%",
               fontFamily: 'Aref',
               fontWeight: "400",
               fontSize: "61px",
@@ -100,7 +100,7 @@ export const CaruserlBanner = () => {
           }} >
           <Typography
             sx={{
-              width: "337px",
+              width: "40%",   
               fontFamily: 'Aref',
               fontWeight: "400",
               fontSize: "61px",

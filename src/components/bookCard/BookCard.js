@@ -3,14 +3,13 @@ import { Box, Link, List, ListItem, Typography } from '@mui/material'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { api } from '../../API/API'
 import { BookCardList } from './bookCardList/BookCardList'
-
-export const BookCard = () => {
+import { t } from 'i18next'
+export const BookCard = ({afterGet,setAfterGet}) => {
 
   const [genre, setGenre] = useState([])
 
   const genreGet = async (data) => {
     const cardCasts = await api.GenreGet(data)
-    console.log(cardCasts);
     setGenre(cardCasts.data)
   }
   useEffect(() => {
@@ -30,7 +29,7 @@ export const BookCard = () => {
             color: "#C9AC8C",
           }}
         >
-          Asosiy kategoriyalar
+         {t("basic_categories")}
         </Typography>
         <List
           sx={{
@@ -40,7 +39,7 @@ export const BookCard = () => {
           }}>
           {
             genre?.map((item, index) =>
-              <ListItem key={index} sx={{ width: "180px" }}>
+              <ListItem key={index} sx={{ width: "180px" }} onClick={()=>setAfterGet([])}>
                 <Link
                   to={`${item.id}`}
                   component={NavLink}
@@ -64,10 +63,9 @@ export const BookCard = () => {
         </List>
         <Box marginTop="40px">
           <Routes>
-            <Route path='/1' end element={<BookCardList />} />
-            <Route path='/2' element={<BookCardList />} />
-            <Route path='/3' element={<BookCardList />} />
-            <Route path='/4' element={<BookCardList />} />
+          {
+              genre.map((item, index) => <Route key={index} path={`/${item.id}`} end element={<BookCardList id={item.id} afterGet={afterGet} />} />)
+            }
           </Routes>
         </Box>
       </Box>

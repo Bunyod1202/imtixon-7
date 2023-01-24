@@ -7,11 +7,16 @@ import * as Yup from "yup"
 import AddImg from "../../assets/image/add-img.png"
 import { api } from '../../API/API';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const AddBookPage = () => {
-  const [inputImgAdd, setInputImgAdd] = useState("")
-  const { t } = useTranslation();
+  const token_id = useSelector((state) => state.token.token)
 
+  const [inputImgAdd, setInputImgAdd] = useState("")
+  const [afterId, setAfterId] = useState([])
+  const { t } = useTranslation();
+ const navigator = useNavigate()
   const [inputImg, setInputImg] = useState("")
   const schema = Yup.object(
     {
@@ -19,8 +24,8 @@ export const AddBookPage = () => {
       page: Yup.string().required('Page is required'),
       year: Yup.string().required('Year is required'),
       price: Yup.string().required('Price is required'),
-      genre_id: Yup.string().required('Genre is required'),
-      author_id: Yup.string().required('Author is required'),
+      genre_id: Yup.number().required('Genre is required'),
+      author_id: Yup.number().required('Author is required'),
       description: Yup.string().required('Description is required'),
 
     }
@@ -39,7 +44,7 @@ export const AddBookPage = () => {
     defaultValues: {
       title: '',
       page: '',
-      year: "",
+      year:'',
       price: '',
       genre_id: '',
       author_id: '',
@@ -49,7 +54,6 @@ export const AddBookPage = () => {
   })
 
   const onSubmit = (data) => {
-    console.log(data);
     let formData = new FormData()
 
     formData.append("title", data.title)
@@ -59,18 +63,14 @@ export const AddBookPage = () => {
     formData.append("genre_id", data.genre_id)
     formData.append("author_id", data.author_id)
     formData.append("description", data.description)
-    formData.append("image ", inputImgAdd)
-
+    formData.append("image", inputImgAdd)
     const bookApiAdd = async () => {
-      const cardCasts = await api.AddBookApi(formData)
-      console.log(cardCasts);
-      if (cardCasts.status === 200) {
-
+      const cardCasts = await api.AddBookApi(formData,token_id)
+      if (cardCasts.status === 201) {
+        navigator(-1)
       }
-
     }
     bookApiAdd()
-
   }
   const addImg = (evt) => {
     evt.preventDefault();
@@ -83,17 +83,25 @@ export const AddBookPage = () => {
     });
   }
 
+  const resAfter = (evt) => {
+    let id = evt.target.value
+    const afteGet = async () => {
+      const cardCasts = await api.AfterGanreGet(id,token_id)
+      setAfterId(cardCasts.data)
+    }
+    afteGet()
 
+  }
   const [genre, setGenre] = useState([])
 
   const genreGet = async () => {
     const cardCasts = await api.GenreGet()
-    console.log(cardCasts);
     setGenre(cardCasts.data)
   }
   useEffect(() => {
     genreGet()
   }, [])
+
   return (
     <>
       <Paper
@@ -120,11 +128,13 @@ export const AddBookPage = () => {
                 height: "428px",
                 backgroundImage: inputImg === "" ? `url('${AddImg}')` : `url('${inputImg}')`,
                 backgroundSize: "cover",
+                backgroundPosition:"center",
                 cursor: "pointer"
               }}
             ></Box>
             <InputBase
-              placeholder='First name'
+              placeholder='img'
+              name='img'
               type="file"
               onChange={addImg}
               sx={{
@@ -161,12 +171,13 @@ export const AddBookPage = () => {
                 lineHeight: "48px",
                 color: "text.primary",
               }}>
-             {t("add_book")}
+              {t("add_book")}
             </Typography>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={1}>
                 <InputBase
+                  name='title'
                   placeholder={t("title")}
                   {...register("title")}
                   sx={{
@@ -181,6 +192,8 @@ export const AddBookPage = () => {
                   }} />
                 <FormHelperText error>{errors.title?.message}</FormHelperText>
                 <InputBase
+                  name='pages'
+                  type="number"
                   placeholder={t("pages")}
                   {...register("page")}
                   sx={{
@@ -195,9 +208,10 @@ export const AddBookPage = () => {
                   }} />
                 <FormHelperText error>{errors.page?.message}</FormHelperText>
                 <InputBase
+                  name='year'
+                  type="number"
                   placeholder={t("year")}
                   {...register("year")}
-                  type="number"
                   sx={{
                     padding: "5px 29px",
                     border: "1px solid #B4B4BB",
@@ -210,6 +224,8 @@ export const AddBookPage = () => {
                   }} />
                 <FormHelperText error>{errors.year?.message}</FormHelperText>
                 <InputBase
+                  name='price'
+                  type="number"
                   placeholder={t("price")}
                   {...register("price")}
                   sx={{
@@ -224,8 +240,8 @@ export const AddBookPage = () => {
                   }} />
                 <FormHelperText error>{errors.price?.message}</FormHelperText>
                 <TextField label={t("genre")}
+                  name='genre'
                   sx={{
-                    // padding: "5px 29px",
                     border: "1px solid #B4B4BB",
                     borderRadius: "10px",
                     fontFamily: 'Poppins',
@@ -237,6 +253,8 @@ export const AddBookPage = () => {
                   {...register("genre_id")}
                   defaultValue=""
                   select
+
+                  onChange={resAfter}
                 >
                   {
                     genre?.map((item, index) =>
@@ -245,20 +263,20 @@ export const AddBookPage = () => {
                           bgcolor: "#fff",
                           "&:hover": { bgcolor: "#fff" },
                           "&:active": { bgcolor: "#fff" }
-                        }} key={index} value={item.name}>
-                      {item.name}
-                    </MenuItem>)
+                        }} key={index} value={item.id}>
+                        {item.name}
+                      </MenuItem>)
                   }
                 </TextField>
 
                 <FormHelperText error>{errors.genre_id?.message}</FormHelperText>
                 <TextField
-                   defaultValue=""
+                  defaultValue=""
+                  name='author'
                   label={t("author")}
                   {...register("author_id")}
                   select
                   sx={{
-                    // padding: "5px 29px",
                     border: "1px solid #B4B4BB",
                     borderRadius: "10px",
                     fontFamily: 'Poppins',
@@ -269,9 +287,21 @@ export const AddBookPage = () => {
                   }}
 
 
-                ></TextField>
+                >
+                  {
+                    afterId?.map((item, index) => <MenuItem
+                      sx={{
+                        bgcolor: "#fff",
+                        "&:hover": { bgcolor: "#fff" },
+                        "&:active": { bgcolor: "#fff" }
+                      }} key={index} value={item.id}>
+                      {item.first_name}{item.last_name}
+                    </MenuItem>)
+                  }
+                </TextField>
                 <FormHelperText error>{errors.author_id?.message}</FormHelperText>
                 <InputBase
+                   name='bio'
                   placeholder={t("bio")}
                   {...register("description")}
                   sx={{

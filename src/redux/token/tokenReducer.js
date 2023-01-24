@@ -1,7 +1,7 @@
 import { TOKEN_REGISTER_ADD, TOKEN_REGISTER_REMUVE } from "./tokenTypes";
 
 const initialState = {
-  token: localStorage.getItem('token')||"",
+  token: JSON.parse(localStorage.getItem('token'))||"",
 }
 
 export const tokenReducter = (state = initialState, action) => {
@@ -10,12 +10,12 @@ export const tokenReducter = (state = initialState, action) => {
     case TOKEN_REGISTER_ADD:
       return {
         ...state,
-        token: state.token = action.paylod.token,
+        token: state.token = action.paylod,
       }
       case TOKEN_REGISTER_REMUVE:
         return {
           ...state,
-          token:state.token = action.paylod.token,
+          token:state.token = action.paylod,
         }
     default:
       return state;

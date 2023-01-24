@@ -1,19 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar, Box, IconButton, Link, List, ListItem, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
+import { api, BASE_URL } from '../../API/API';
+import { useDispatch, useSelector } from 'react-redux';
+import { TokenRegisterRemuve } from '../../redux/token/tokenActions';
 
 export const Header = () => {
+  const token_id = useSelector((state) => state.token.token)
+  const dispatch = useDispatch()
   const { t } = useTranslation();
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [user, setUser] = useState({})
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
+let userName = user.first_name + user.last_name
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+
+  const userGet = async (token_id) => {
+    const cardCasts = await api.UserGet(token_id)
+
+    setUser(cardCasts.data)
+  }
+  useEffect(() => {
+    userGet(token_id)
+  }, [token_id])
+
   return (
     <>
       <Box
@@ -59,7 +76,7 @@ export const Header = () => {
                     width: "150px"
                   }}>
                   <Link
-                    to="/home/1"
+                    to="/home"
                     component={NavLink}
                     sx={{
                       textAlign: 'center',
@@ -103,11 +120,11 @@ export const Header = () => {
                 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={String(userName)} src={user ? BASE_URL + "/" + user.image : ""} />
                   </IconButton>
                 </Tooltip>
                 <Menu
-                  sx={{ mt: '45px' }}
+                  sx={{ mt: '45px' , }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
@@ -122,8 +139,29 @@ export const Header = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem >
-                    <Typography textAlign="center">sss</Typography>
+                  <MenuItem sx={{
+               
+                    
+                  }}>
+                    <Link component={NavLink} to="/admin/1" color={"#D1B89D"} textAlign="center">Profile</Link>
+                  </MenuItem>
+                  <MenuItem sx={{
+                   
+                  }} >
+                    <Link component={NavLink} to="/add-after" color={"#D1B89D"} textAlign="center">Add author</Link>
+                  </MenuItem>
+                  <MenuItem sx={{
+                 
+                  }} >
+                    <Link component={NavLink} to="/add-book" color={"#D1B89D"} textAlign="center">Add book</Link>
+                  </MenuItem>
+                  <MenuItem sx={{
+                  
+                  }} >
+                    <Link component={NavLink} to="/login" color={"#D1B89D"} onClick={() => {
+                      dispatch(TokenRegisterRemuve(""));
+                      localStorage.removeItem('token')
+                    }} textAlign="center">Log out</Link>
                   </MenuItem>
                 </Menu>
               </Box>

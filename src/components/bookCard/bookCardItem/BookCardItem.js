@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardContent, CardMedia, Link, Typography } from '@mui/material'
 import { Link as RoutLink } from 'react-router-dom'
-import BookImg from "../../../assets/image/book.png"
-export const BookCardItem = () => {
+import { api, BASE_URL } from '../../../API/API'
+import { useSelector } from 'react-redux'
+export const BookCardItem = ({ item }) => {
+  const { author_id, id, title, image } = item 
+  const token_id = useSelector((state) => state.token.token)
+  const [data, setData] = useState({})
+  
+  const afterGanreGet = async (id,token_id) => {
+    const cardCasts = await api.AfterIdGet(id,token_id)
+    setData(cardCasts.data)
+  }
+  useEffect(() => {
+    afterGanreGet(author_id,token_id)
+  }, [author_id,token_id])
+  
   return (
     <>
       <Card
@@ -15,15 +28,16 @@ export const BookCardItem = () => {
         }}>
         <Link
           component={RoutLink}
-          to="/"
+          to={`/book/${id}`}
           sx={{
             textDecoration: "none"
           }}>
           <CardMedia
             sx={{
-              height: 283
+              height: 283,
+              borderRadius:"20px"
             }}
-            image={BookImg}
+            image={BASE_URL +"/"+image}
             title="green iguana"
           />
           <CardContent
@@ -43,7 +57,7 @@ export const BookCardItem = () => {
                 color: "text.card_title",
               }}
               component="div">
-              Dunyoning ishlari
+             {title}
             </Typography>
             <Typography
               variant="body2"
@@ -55,7 +69,7 @@ export const BookCardItem = () => {
                 lineHeight: "24px",
                 color: "link.primary",
               }}>
-              O’tkir Hoshimov
+              {data.first_name + " " + data.last_name}
             </Typography>
           </CardContent>
         </Link>

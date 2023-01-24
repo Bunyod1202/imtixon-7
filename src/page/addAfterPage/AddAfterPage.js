@@ -8,18 +8,18 @@ import AddImg from "../../assets/image/add-img.png"
 import { api } from '../../API/API';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 export const AddAfterPage = () => {
+  const token_id = useSelector((state) => state.token.token)
   const [inputImgAdd, setInputImgAdd] = useState("")
   const [inputImg, setInputImg] = useState("")
-  console.log(inputImgAdd);
   const navigator = useNavigate()
   const { t } = useTranslation();
   const [genre, setGenre] = useState([])
 
   const genreGet = async () => {
     const cardCasts = await api.GenreGet()
-    console.log(cardCasts);
     setGenre(cardCasts.data)
   }
   useEffect(() => {
@@ -61,7 +61,6 @@ export const AddAfterPage = () => {
   })
 
   const onSubmit = (data) => {
-    console.log(data);
     let formData = new FormData()
 
     formData.append("first_name", data.first_name)
@@ -72,14 +71,12 @@ export const AddAfterPage = () => {
     formData.append("genre_id", data.genre_id)
     formData.append("bio", data.bio)
     formData.append("image", inputImgAdd)
-console.log(formData);
     const afterApiAdd = async () => {
-      const cardCasts = await api.AddAfterApi(formData)
-      console.log(cardCasts);
+      const cardCasts = await api.AddAfterApi(formData,token_id)
       if (cardCasts.status === 201) {
         navigator(-1)
       }
-      console.log(cardCasts);
+
 
     }
     afterApiAdd()
@@ -121,6 +118,7 @@ console.log(formData);
                 height: "428px",
                 backgroundImage: inputImg === "" ?`url('${AddImg}')`:`url('${inputImg}')`,
                 backgroundSize: "cover",
+                backgroundPosition:"center",
                 cursor: "pointer"
             }}
             ></Box>

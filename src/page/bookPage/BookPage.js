@@ -1,14 +1,37 @@
 import { Box, Container, Link, Paper, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../../components/header/Header'
-import AdibImg from "../../assets/image/Rectangle 3 (1).png"
 import { CaruselCardList } from '../../components/caruselCardList/CaruselCardList'
 import { BookCardItem } from '../../components/bookCard/bookCardItem/BookCardItem'
 import SouthIcon from '@mui/icons-material/South';
 import { useTranslation } from 'react-i18next'
+import { NavLink, useParams } from 'react-router-dom'
+import { api, BASE_URL } from '../../API/API'
+import { useSelector } from 'react-redux'
 
 export const BookPage = () => {
+  const token_id = useSelector((state) => state.token.token)
+  const [dataAfterBook, setDataAfterBook] = useState([])
+  const { id } = useParams()
   const { t } = useTranslation();
+  const [data, setData] = useState({})
+
+  const bookIdGet = async (id, token_id) => {
+    const cardCasts = await api.BookIdGet(id, token_id)
+    setData(cardCasts.data)
+  }
+  useEffect(() => {
+    bookIdGet(id, token_id)
+  }, [id, token_id])
+
+
+  const afterBookGet = async (id, token_id) => {
+    const cardCasts = await api.AfterBookApi(id, token_id)
+    setDataAfterBook(cardCasts.data)
+  }
+  useEffect(() => {
+    afterBookGet(data?.author_id, token_id)
+  }, [data, token_id])
   return (
     <>
       <Container
@@ -26,9 +49,11 @@ export const BookPage = () => {
             sx={{
               marginRight: "64px"
             }}>
-            <img src={AdibImg} alt="adib" />
+            <img width={505} height={681} src={BASE_URL + "/" + data.image} alt="adib" />
           </Box>
-          <Box>
+          <Box sx={{
+            width: "100%",
+          }}>
             <Typography
               sx={{
                 marginTop: "30px",
@@ -38,7 +63,7 @@ export const BookPage = () => {
                 lineHeight: "72px",
                 color: "#C9AC8C",
               }}
-            >O’tkir Hoshimov</Typography>
+            >{data.title}</Typography>
             <Box>
               <Box
                 sx={{
@@ -64,7 +89,7 @@ export const BookPage = () => {
                     fontSize: "20px",
                     lineHeight: "30px",
                     color: "text.primary",
-                  }}>376 page</Typography>
+                  }}>{data.page}page</Typography>
               </Box>
               <Box
                 sx={{
@@ -90,7 +115,7 @@ export const BookPage = () => {
                     fontSize: "20px",
                     lineHeight: "30px",
                     color: "text.primary",
-                  }}>2021 years</Typography>
+                  }}>{data.year} years</Typography>
               </Box>
               <Box
                 sx={{
@@ -116,24 +141,24 @@ export const BookPage = () => {
                     fontSize: "20px",
                     lineHeight: "30px",
                     color: "text.primary",
-                  }}>$124.9</Typography>
+                  }}>${data.price}</Typography>
               </Box>
             </Box>
             <Box sx={{
-                        marginTop: "30px",
+              marginTop: "30px",
               display: "flex",
               alignItems: "center",
             }}>
               <Typography
                 sx={{
-           
+
                   fontFamily: 'Poppins',
                   fontWeight: "400",
                   fontSize: "16px",
                   lineHeight: "24px",
                   color: "#D1B89D",
                 }}>{t("full_information")}</Typography><SouthIcon sx={{ fontSize: "16px" }} />
-              <Box sx={{width:"78%",height:"1px" ,bgcolor:"#D1B89D"}}></Box>
+              <Box sx={{ width: "78%", height: "1px", bgcolor: "#D1B89D" }}></Box>
             </Box>
             <Typography
               sx={{
@@ -144,76 +169,8 @@ export const BookPage = () => {
                 lineHeight: "24px",
                 color: "text.primary",
               }}
-            >Oʻtkir Hoshimov 1941 yil Toshkent viloyatining Zangiota (hozirgi Chilonzor) tumanidagi Doʻmbiravot mavzeida tugʻildi. Oʻ. Hoshimov mehnat faoliyatini erta boshladi. Toshkent Davlat universiteti (hozirgi Oʻzbekiston Milliy universiteti)ning jurnalistika kulliyotida oʻqish bilan </Typography>
-            <Box
-              sx={{
-                // width: "400px",
-                marginTop: "44px",
-                display: 'flex',
-                // justifyContent: "space-between",
-                alignItems: "center",
-              }}>
-              <Box>
-                <Typography
-                  sx={{
-                    fontFamily: 'Poppins',
-                    fontWeight: "400",
-                    fontSize: "12px",
-                    lineHeight: "18px",
-                    color: "text.disabled",
-                  }}>Tavallud sanasi</Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Poppins',
-                    fontWeight: "400",
-                    fontSize: "39px",
-                    lineHeight: "144.4%",
-                    color: "#C9AC8C",
-                  }}>1941</Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Poppins',
-                    fontWeight: "400",
-                    fontSize: "12px",
-                    lineHeight: "18px",
-                    color: "text.disabled",
-                  }}>Toshkent, Uzbekistan</Typography>
-              </Box>
-              <Box
-                sx={{
-                  height: "4px",
-                  width: "20px",
-                  bgcolor: "#D1B89D",
-                  marginX: "20px",
-                }}
-              ></Box>
-              <Box>
-                <Typography
-                  sx={{
-                    fontFamily: 'Poppins',
-                    fontWeight: "400",
-                    fontSize: "12px",
-                    lineHeight: "18px",
-                    color: "text.disabled",
-                  }}>Vafot etgan sana </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Poppins',
-                    fontWeight: "400",
-                    fontSize: "39px",
-                    lineHeight: "144.4%",
-                    color: "#C9AC8C",
-                  }}>2013</Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Poppins',
-                    fontWeight: "400",
-                    fontSize: "12px",
-                    lineHeight: "18px",
-                    color: "text.disabled",
-                  }}>Toshkent, Uzbekistan</Typography>
-              </Box>
-            </Box>
+            >{data.description}</Typography>
+
           </Box>
         </Paper>
         <Paper sx={{
@@ -241,6 +198,8 @@ export const BookPage = () => {
               {t("works")}
             </Typography>
             <Link
+              component={NavLink}
+              to="/home/1"
               sx={{
                 fontFamily: 'Poppins',
                 fontWeight: "400",
@@ -250,13 +209,18 @@ export const BookPage = () => {
                 textDecoration: "none"
               }} >{t("see_all")}</Link>
           </Box>
-          <CaruselCardList items={6}>
-            <BookCardItem />
-            <BookCardItem />
-            <BookCardItem />
-            <BookCardItem />
-            <BookCardItem />
-          </CaruselCardList>
+       
+
+          {
+            dataAfterBook.length ? <CaruselCardList items={6}>
+            {
+                dataAfterBook?.map((item, index) => <BookCardItem key={index} item={item} />)
+              }
+            </CaruselCardList>:""
+       
+      }
+               
+         
         </Paper>
       </Container>
     </>
